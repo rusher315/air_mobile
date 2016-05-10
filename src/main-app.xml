@@ -18,17 +18,17 @@
 	<id>com.air.mobile</id>
 
 	<!-- Used as the filename for the application. Required. -->
-	<filename>main</filename>
+	<filename>AirOne</filename>
 
 	<!-- The name that is displayed in the AIR application installer. 
 	May have multiple values for each language. See samples or xsd schema file. Optional. -->
-	<name>main</name>
+	<name>TheAirOne</name>
 	
 	<!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade. 
 	Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
 	An updated version of application must have a versionNumber value higher than the previous version. Required for namespace >= 2.5 .
     For iOS Apps, this represents build number. -->
-	<versionNumber>0.0.0</versionNumber>
+	<versionNumber>0.0.1</versionNumber>
 		         
 	<!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents the version of the application, as it should be shown to users. 
      For iOS Apps, this represents application version number and format should be (<0-999>.<0-999>.<0-999>).
@@ -93,15 +93,15 @@
 
         <!-- The aspect ratio of the app ("portrait" or "landscape" or "any"). Optional. Mobile only. Default is the natural orientation of the device -->
 
-        <!-- <aspectRatio></aspectRatio> -->
+		<!--<aspectRatio>portrait</aspectRatio> -->
 
         <!-- Whether the app will begin auto-orienting on launch. Optional. Mobile only. Default false -->
 
-        <!-- <autoOrients></autoOrients> -->
+		<!--<autoOrients>false</autoOrients> -->
 
         <!-- Whether the app launches in full screen. Optional. Mobile only. Default false -->
 
-        <!-- <fullScreen></fullScreen> -->
+		<!--<fullScreen>true</fullScreen> -->
 
         <!-- The render mode for the app (either auto, cpu, gpu, or direct). Optional. Default auto -->
 
@@ -115,10 +115,11 @@
 
 		<!-- Display Resolution for the app (either "standard" or "high"). Optional, OSX-only. Default "standard" -->
 		<!-- <requestedDisplayResolution></requestedDisplayResolution> -->
-	<autoOrients>true</autoOrients>
-        <fullScreen>true</fullScreen>
-        <visible>true</visible>
-    </initialWindow>
+			<aspectRatio>portrait</aspectRatio>
+			<autoOrients>false</autoOrients>
+	        <fullScreen>true</fullScreen>
+	        <visible>true</visible>
+    	</initialWindow>
 
 	<!-- We recommend omitting the supportedProfiles element, -->
 	<!-- which in turn permits your application to be deployed to all -->
@@ -172,6 +173,10 @@
 		<image1024x1024></image1024x1024>
 	</icon> -->
 
+	<icon>
+		<image72x72>icon/72.png</image72x72>
+		<image120x120>icon/120.png</image120x120>
+	</icon>
 	<!-- Whether the application handles the update when a user double-clicks an update version
 	of the AIR file (true), or the default AIR application installer handles the update (false).
 	Optional. Default false. -->
