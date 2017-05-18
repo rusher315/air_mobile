@@ -24,6 +24,8 @@ package
 	import flash.ui.Keyboard;
 	import flash.utils.getDefinitionByName;
 	
+	import sudoku.Sudoku;
+	
 	
 //	[SWF(width="720",height="1280"backgroundColor="#333333")]
 	public class main extends Sprite
@@ -31,6 +33,7 @@ package
 		public function main()
 		{
 			super();
+			new Sudoku();
 			
 			if (stage) 
 			{
@@ -54,6 +57,7 @@ package
 		{
 			removeEventListener(Event.ADDED_TO_STAGE,onStage);
 			initialize();
+			//
 		}
 		
 		private function initialize():void
