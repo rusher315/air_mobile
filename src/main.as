@@ -24,7 +24,8 @@ package
 	import flash.ui.Keyboard;
 	import flash.utils.getDefinitionByName;
 	
-	import sudoku.Sudoku;
+	import sudoku.SudokuMain;
+	import sudoku.view.SudokuView;
 	
 	
 //	[SWF(width="720",height="1280"backgroundColor="#333333")]
@@ -33,8 +34,6 @@ package
 		public function main()
 		{
 			super();
-			new Sudoku();
-			
 			if (stage) 
 			{
 				initialize();
@@ -63,12 +62,15 @@ package
 		private function initialize():void
 		{
 			// 支持 autoOrient
-			//stage.autoOrients = false;
+			stage.autoOrients = false;
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.frameRate=30;
 			//
 //			root.scale
+			//
+			addChild(new SudokuMain(stage.stageWidth));
+			return;
 			//
 			var urlloader:URLLoader = new URLLoader();
 			urlloader.dataFormat = URLLoaderDataFormat.BINARY;
