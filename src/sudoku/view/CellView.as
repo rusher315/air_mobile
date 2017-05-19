@@ -3,7 +3,6 @@ package sudoku.view
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import flash.events.TouchEvent;
 	import flash.text.TextField;
 	
 	import sudoku.model.CellData;
@@ -26,6 +25,9 @@ package sudoku.view
 		{
 			textfield = new TextField();
 			textfield.mouseEnabled  =false;
+			textfield.width = cellwidth;
+			textfield.height = cellwidth;
+			textfield.wordWrap = true;
 			_data = data;
 			_data.addEventListener(CellData.THIS_CELL_UPDATE,onCellUpdate);
 			textfield.text = _data.numberString;

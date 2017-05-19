@@ -1,12 +1,17 @@
 package sudoku.view
 {
 	import flash.display.Sprite;
+	import flash.events.Event;
 	
+	import sudoku.SudokuEvent;
 	import sudoku.model.CellData;
 	import sudoku.model.SudokuData;
 	
 	public class SudokuView extends Sprite
 	{
+		
+		private var selector:NumberSelector;
+		
 		public function SudokuView(stagewidth:Number,celldatas:Array)
 		{
 			super();
@@ -16,7 +21,8 @@ package sudoku.view
 		
 		private function init(stagewidth:Number,celldatas:Array):void
 		{
-			
+			selector = new NumberSelector();
+			addChild(selector);
 //			for (var i:int = 0; i < SudokuData.LENGTH*SudokuData.LENGTH; i++) 
 			var cellwidth:Number = stagewidth/SudokuData.LENGTH;
 			var data:CellData;
@@ -27,12 +33,22 @@ package sudoku.view
 				cell.x = data.lineIndex*cellwidth;
 				cell.y = data.rowIndex*cellwidth;
 				addChild(cell);
+				//
+				selector.y = cell.y+cellwidth;
 			}
+			
+			selector.addEventListener("MouseEvent.CLICK",onClickSelector);
 			
 //			this.graphics.beginFill(0);
 //			this.graphics.lineStyle(1,0xffffff);
 //			this.graphics.drawRect(0,0,width1,width1);
 //			this.graphics.endFill();
+		}
+		
+		protected function onClickSelector(event:SudokuEvent):void
+		{
+			// TODO Auto-generated method stub
+			
 		}
 	}
 }
