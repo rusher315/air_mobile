@@ -1,7 +1,6 @@
 package sudoku.view
 {
 	import flash.display.Sprite;
-	import flash.events.Event;
 	
 	import sudoku.SudokuEvent;
 	import sudoku.model.CellData;
@@ -35,9 +34,11 @@ package sudoku.view
 				addChild(cell);
 				//
 				selector.y = cell.y+cellwidth;
+				//
+				cell.addEventListener(SudokuEvent.ON_CLICK_CELL,onClickCell);
 			}
 			
-			selector.addEventListener("MouseEvent.CLICK",onClickSelector);
+			selector.addEventListener(SudokuEvent.ON_CLICK_NUMBER,onClickSelector);
 			
 //			this.graphics.beginFill(0);
 //			this.graphics.lineStyle(1,0xffffff);
@@ -45,10 +46,14 @@ package sudoku.view
 //			this.graphics.endFill();
 		}
 		
+		protected function onClickCell(event:SudokuEvent):void
+		{
+			trace(event.data);
+		}
+		
 		protected function onClickSelector(event:SudokuEvent):void
 		{
-			// TODO Auto-generated method stub
-			
+			trace(event.data);
 		}
 	}
 }

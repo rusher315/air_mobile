@@ -5,6 +5,7 @@ package sudoku.view
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
+	import sudoku.SudokuEvent;
 	import sudoku.model.CellData;
 	
 	public class CellView extends Sprite
@@ -42,8 +43,7 @@ package sudoku.view
 		
 		protected function onClickCell(event:MouseEvent):void
 		{
-			trace("CellView.onTouch(event)");
-			
+			dispatchEvent(new SudokuEvent(SudokuEvent.ON_CLICK_CELL,_data.cellIndex));
 		}
 		
 		protected function onCellUpdate(event:Event):void

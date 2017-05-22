@@ -4,6 +4,8 @@ package sudoku
 	
 	public class SudokuEvent extends Event
 	{
+		public static const ON_CLICK_CELL:String = "ON_CLICK_CELL";
+		public static const ON_CLICK_NUMBER:String = "ON_CLICK_NUMBER";
 		
 		private var _data:*;
 		

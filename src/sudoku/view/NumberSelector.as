@@ -1,7 +1,6 @@
 package sudoku.view
 {
 	import flash.display.Sprite;
-	import flash.events.MouseEvent;
 	
 	import sudoku.SudokuEvent;
 	import sudoku.model.SudokuData;
@@ -21,14 +20,14 @@ package sudoku.view
 				var button:NumberButton = new NumberButton(i+1);
 				button.x = i*50;
 				addChild(button);
-				button.addEventListener("MouseEvent.CLICK",onClick1);
+				button.addEventListener("MouseEvent.CLICK",onClickNumber);
 			}
 			
 		}
 		
-		protected function onClick1(event:SudokuEvent):void
+		protected function onClickNumber(event:SudokuEvent):void
 		{
-			this.dispatchEvent(new SudokuEvent("MouseEvent.CLICK",event.data));
+			this.dispatchEvent(new SudokuEvent(SudokuEvent.ON_CLICK_NUMBER,event.data));
 		}
 		
 	}
