@@ -3,7 +3,9 @@ package sudoku.view
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.filters.GlowFilter;
 	import flash.text.TextField;
+	import flash.text.TextFieldAutoSize;
 	
 	import sudoku.SudokuEvent;
 	import sudoku.model.CellData;
@@ -29,12 +31,15 @@ package sudoku.view
 			textfield.width = cellwidth;
 			textfield.height = cellwidth;
 			textfield.wordWrap = true;
+			textfield.autoSize = TextFieldAutoSize.CENTER;
 			_data = data;
 			_data.addEventListener(CellData.THIS_CELL_UPDATE,onCellUpdate);
-			textfield.text = _data.numberString;
+			textfield.htmlText ="<font size='15'>" +_data.numberString +"</font>";
 			addChild(textfield);
-//			this.graphics.beginFill(0);
-			this.graphics.lineStyle(1,0);
+			//
+			this.graphics.clear();
+			this.graphics.beginFill(0xeeeeee);
+			this.graphics.lineStyle(0.5,0);
 			this.graphics.drawRect(0,0,cellwidth,cellwidth);
 			this.graphics.endFill();
 			//
@@ -48,8 +53,32 @@ package sudoku.view
 		
 		protected function onCellUpdate(event:Event):void
 		{
-			textfield.text = _data.numberString;
+			textfield.htmlText ="<font size='16'>" + _data.numberString +"</font>";
 		}		
+
+		public function get data():CellData
+		{
+			return _data;
+		}
+		
+		public function select(value:Boolean):void
+		{
+			if (value) 
+			{
+				this.filters = [new GlowFilter(0xff0000,1,16,16,2,1,true,false)];
+			}
+			else
+			{
+				this.filters = [];
+			}
+			
+//			this.graphics.clear();
+//			this.graphics.beginFill(0xeeeeee);
+//			this.graphics.lineStyle(2,0);
+//			this.graphics.drawRect(0,0,cellwidth,cellwidth);
+//			this.graphics.endFill();
+		}
+
 		
 	}
 }

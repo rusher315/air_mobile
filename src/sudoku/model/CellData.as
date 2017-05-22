@@ -19,22 +19,18 @@ package sudoku.model
 		
 		private var _isConfirm:Boolean = false;
 		
-		public function CellData(cellIndex:int/*,lineIndex:int,rowIndex:int,setIndex:int*/)
+		public function CellData(cellIndex:int)
 		{
-			init(cellIndex/*,lineIndex,rowIndex,setIndex*/);
+			init(cellIndex);
 		}
 		
-		private function init(cellIndex:int/*,lineIndex:int,rowIndex:int,setIndex:int*/):void
+		private function init(cellIndex:int):void
 		{
 			_cellIndex = cellIndex;
 			//
 			_lineIndex = cellIndex%SudokuData.LENGTH;
 			_rowIndex = int(cellIndex/SudokuData.LENGTH);
 			_setIndex = int(lineIndex/3)+int(rowIndex/3)*3;
-			//
-//			_lineIndex = lineIndex;
-//			_rowIndex = rowIndex;
-//			_setIndex = setIndex;
 			//
 //			for each (var number:int in numberList) //wrong
 //			{
@@ -68,7 +64,7 @@ package sudoku.model
 			return _setIndex;
 		}
 		
-		public function confirmNumber(number:int):void
+		public function confirmNumber(number:int):void//todo
 		{
 			if (number>0&&number<=SudokuData.LENGTH)
 			{

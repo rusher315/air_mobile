@@ -11,6 +11,10 @@ package sudoku.view
 		
 		private var selector:NumberSelector;
 		
+		private var selectedCell:CellView;
+		
+		private var inputNumber:Array = [];
+		
 		public function SudokuView(stagewidth:Number,celldatas:Array)
 		{
 			super();
@@ -22,15 +26,17 @@ package sudoku.view
 		{
 			selector = new NumberSelector();
 			addChild(selector);
-//			for (var i:int = 0; i < SudokuData.LENGTH*SudokuData.LENGTH; i++) 
+			selector.visible = false;
+			//
 			var cellwidth:Number = stagewidth/SudokuData.LENGTH;
+			cellwidth = 50;
 			var data:CellData;
 			for (var i:int = 0; i < celldatas.length; i++) 
 			{
 				data = celldatas[i];
 				var cell:CellView = new CellView(cellwidth,data);
-				cell.x = data.lineIndex*cellwidth;
-				cell.y = data.rowIndex*cellwidth;
+				cell.x = data.lineIndex*(cellwidth+1);
+				cell.y = data.rowIndex*(cellwidth+1);
 				addChild(cell);
 				//
 				selector.y = cell.y+cellwidth;
@@ -40,19 +46,33 @@ package sudoku.view
 			
 			selector.addEventListener(SudokuEvent.ON_CLICK_NUMBER,onClickSelector);
 			
-//			this.graphics.beginFill(0);
-//			this.graphics.lineStyle(1,0xffffff);
-//			this.graphics.drawRect(0,0,width1,width1);
-//			this.graphics.endFill();
 		}
 		
 		protected function onClickCell(event:SudokuEvent):void
 		{
+			var index:int = event.data;
+			var cell:CellView = event.target as CellView;
+			if (selectedCell) 
+			{
+				selectedCell.select(false);
+			}
+			selectedCell = cell;
+			selectedCell.select(true);
+			//
+			selector.visible = true;
+			
 			trace(event.data);
 		}
 		
 		protected function onClickSelector(event:SudokuEvent):void
 		{
+			var number:int = event.data;
+			
+			if (selectedCell) 
+			{
+				selectedCell.data.confirmNumber(number);
+			}
+			
 			trace(event.data);
 		}
 	}
