@@ -35,8 +35,8 @@ package sudoku.view
 			{
 				data = celldatas[i];
 				var cell:CellView = new CellView(cellwidth,data);
-				cell.x = data.lineIndex*(cellwidth+1);
-				cell.y = data.rowIndex*(cellwidth+1);
+				cell.x = data.lineIndex*(cellwidth+1)+int(data.lineIndex/3)*5;
+				cell.y = data.rowIndex*(cellwidth+1)+int(data.rowIndex/3)*5;
 				addChild(cell);
 				//
 				selector.y = cell.y+cellwidth;
@@ -70,7 +70,7 @@ package sudoku.view
 			
 			if (selectedCell) 
 			{
-				selectedCell.data.confirmNumber(number);
+				selectedCell.data.setConfirmNumber(number);
 			}
 			
 			trace(event.data);

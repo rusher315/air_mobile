@@ -7,9 +7,9 @@ package sudoku.model
 		
 		private var cellList:Vector.<CellData> = new Vector.<CellData>(LENGTH*LENGTH,true);
 		//
-		private var lineList:Vector.<GroupData> = new Vector.<GroupData>(LENGTH,true);//列
-		private var rowList:Vector.<GroupData> = new Vector.<GroupData>(LENGTH,true);//行
-		private var setList:Vector.<GroupData> = new Vector.<GroupData>(LENGTH,true);//组
+		private var lineGroupList:Vector.<GroupData> = new Vector.<GroupData>(LENGTH,true);//列
+		private var rowGroupList:Vector.<GroupData> = new Vector.<GroupData>(LENGTH,true);//行
+		private var setGroupList:Vector.<GroupData> = new Vector.<GroupData>(LENGTH,true);//组
 		//
 //		private var temptemp:Array = [
 //		0,0,4,0,9,0,0,8,3,
@@ -83,9 +83,8 @@ package sudoku.model
 			{
 				cellIndex = i;
 				//
-				var cell:CellData = new CellData(cellIndex/*,lineIndex,rowIndex,setIndex*/);
+				var cell:CellData = new CellData(cellIndex);
 				cellList[cellIndex] = cell;
-//				trace(index,line,row,sset);
 				//
 				if (templine[cell.lineIndex]==null) templine[cell.lineIndex]=[];
 				if (temprow[cell.rowIndex]==null) temprow[cell.rowIndex]=[];
@@ -98,17 +97,17 @@ package sudoku.model
 			//
 			for (var n:int = 0; n < templine.length; n++) 
 			{
-				lineList[n] = new GroupData(templine[n]);
+				lineGroupList[n] = new GroupData(templine[n]);
 			}
 			//
 			for (var m:int = 0; m < temprow.length; m++) 
 			{
-				rowList[m] = new GroupData(temprow[m]);
+				rowGroupList[m] = new GroupData(temprow[m]);
 			}
 			//
 			for (var h:int = 0; h < tempset.length; h++) 
 			{
-				setList[h] = new GroupData(tempset[h]);
+				setGroupList[h] = new GroupData(tempset[h]);
 			}
 			//
 		}
@@ -156,9 +155,9 @@ package sudoku.model
 			
 			//
 			var str:String = "";
-			for (var o:int = 0; o < rowList.length; o++) 
+			for (var o:int = 0; o < rowGroupList.length; o++) 
 			{
-				group  =rowList[o];
+				group  =rowGroupList[o];
 				trace(group.numberString);
 			}
 		}

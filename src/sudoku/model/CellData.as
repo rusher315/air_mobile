@@ -17,6 +17,8 @@ package sudoku.model
 		private var _rowIndex:int;
 		private var _setIndex:int;
 		
+		private var groupList:Vector.<GroupData> = new Vector.<GroupData>();
+		
 		private var _isConfirm:Boolean = false;
 		
 		public function CellData(cellIndex:int)
@@ -64,26 +66,41 @@ package sudoku.model
 			return _setIndex;
 		}
 		
-		public function confirmNumber(number:int):void//todo
+		public function addGroup(group:GroupData):void
 		{
-			if (number>0&&number<=SudokuData.LENGTH)
+			if (groupList.indexOf(group)!=-1||groupList.length>=3) 
 			{
-				if (leaveNumber.indexOf(number)==-1) 
-				{
-					throw new Error();
-				}
-//				for each (var temp:int in numberList) //wrong
-//				{
-//					temp = 0;
-//				}
-				for (var i:int = 0; i < numberList.length; i++) 
-				{
-					numberList[i] = 0;
-				}
-				numberList[number-1] = 1;
-				checkConfirm();
-				this.dispatchEvent(new SudokuEvent(THIS_CELL_UPDATE));
+				throw new Error();
 			}
+			groupList.push(group);
+		}
+		
+		public function tryConfirmNumber(number:int):Boolean//todo
+		{
+			if (number<=0||number>SudokuData.LENGTH) return false;
+			if (leaveNumber.indexOf(number)==-1) return false;
+//			if (groupList.length!=3) 
+			for each (var group:GroupData in groupList) 
+			{
+				if (group.hasNumberCount(number)!=1)  return false;
+			}
+			//
+			setConfirmNumber(number);
+			return true;
+		}
+		
+		public function setConfirmNumber(number:int):void
+		{
+			if (number<=0||number>SudokuData.LENGTH) throw new Error();
+			if (leaveNumber.indexOf(number)==-1) throw new Error();
+			//
+			for (var i:int = 0; i < numberList.length; i++) 
+			{
+				numberList[i] = 0;
+			}
+			numberList[number-1] = 1;
+			this.dispatchEvent(new SudokuEvent(THIS_CELL_UPDATE));
+			checkConfirm();
 		}
 		
 		public function notNumber(number:int):void
@@ -91,8 +108,8 @@ package sudoku.model
 			if (number>0&&number<=SudokuData.LENGTH)
 			{
 				numberList[number-1] = 0;
-				checkConfirm();
 				this.dispatchEvent(new SudokuEvent(THIS_CELL_UPDATE));
+				checkConfirm();
 			}
 		}
 		

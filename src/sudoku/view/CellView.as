@@ -38,7 +38,7 @@ package sudoku.view
 			addChild(textfield);
 			//
 			this.graphics.clear();
-			this.graphics.beginFill(0xeeeeee);
+			this.graphics.beginFill(0x888888);
 			this.graphics.lineStyle(0.5,0);
 			this.graphics.drawRect(0,0,cellwidth,cellwidth);
 			this.graphics.endFill();
@@ -65,7 +65,7 @@ package sudoku.view
 		{
 			if (value) 
 			{
-				this.filters = [new GlowFilter(0xff0000,1,16,16,2,1,true,false)];
+				this.filters = [new GlowFilter(0x000000,1,16,16,2,1,true,false)];
 			}
 			else
 			{

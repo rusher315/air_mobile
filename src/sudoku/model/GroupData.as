@@ -26,6 +26,7 @@ package sudoku.model
 //				var cell:SudokuCell = list.shift() as SudokuCell;
 				var cell:CellData = list[i] as CellData;
 				if (cell==null) trace("错误2");
+				cell.addGroup(this);
 				cellList[i] = cell;
 				cellList[i].addEventListener(CellData.THIS_CELL_CONFIRM,onCellConfirm);
 			}
@@ -59,6 +60,23 @@ package sudoku.model
 			}
 		}
 		
+		public function hasNumberCount(number:int):int
+		{
+			var count:int = 0;
+			var cell:CellData;
+			var temp:Array;
+			for each (cell in cellList)
+			{
+				temp = null;
+				temp = cell.leaveNumber;
+				if (temp.indexOf(number)!=-1) 
+				{
+					count++;
+				}
+			}
+			return count;
+		}
+		
 		public function checkConfirm():void
 		{
 			var cell:CellData;
@@ -88,7 +106,7 @@ package sudoku.model
 						temp = cell.leaveNumber;
 						if (temp.indexOf(n+1)!=-1&&!cell.isConfirm) 
 						{
-							cell.confirmNumber(n+1);
+							cell.tryConfirmNumber(n+1);
 						}
 					}
 				}
