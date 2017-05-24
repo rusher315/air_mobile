@@ -112,6 +112,11 @@ package sudoku.model
 			checkConfirm();
 		}
 		
+		public function setNumber(list:Array):void
+		{
+			
+		}
+		
 		public function notNumber(number:int):void
 		{
 			if (number>0&&number<=SudokuData.LENGTH)

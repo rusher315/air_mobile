@@ -122,6 +122,12 @@ package sudoku.model
 			return list;
 		}
 		
+		public function get clone():SudokuData
+		{
+			
+			return this;
+		}
+		
 		public function lkasjflkasdjf():void
 		{
 			if (temptemp.length!=cellList.length) throw new Error();
