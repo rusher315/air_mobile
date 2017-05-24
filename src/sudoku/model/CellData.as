@@ -75,18 +75,26 @@ package sudoku.model
 			groupList.push(group);
 		}
 		
-		public function tryConfirmNumber(number:int):Boolean//todo
+		private function checkConfirmNumber(number:int):Boolean
 		{
 			if (number<=0||number>SudokuData.LENGTH) return false;
 			if (leaveNumber.indexOf(number)==-1) return false;
 //			if (groupList.length!=3) 
 			for each (var group:GroupData in groupList) 
 			{
-				if (group.hasNumberCount(number)!=1)  return false;
+				if (group.hasNumberCount(number)!=1/*&&group.hasNumberCount(number)!=SudokuData.LENGTH*/)  return false;
 			}
-			//
-			setConfirmNumber(number);
 			return true;
+		}
+		
+		public function tryConfirmNumber(number:int):Boolean//todo
+		{
+			if(checkConfirmNumber(number))
+			{
+				setConfirmNumber(number);
+				return true;
+			}
+			return false;
 		}
 		
 		public function setConfirmNumber(number:int):void
@@ -100,6 +108,7 @@ package sudoku.model
 			}
 			numberList[number-1] = 1;
 			this.dispatchEvent(new SudokuEvent(THIS_CELL_UPDATE));
+			_isConfirm = true;
 			checkConfirm();
 		}
 		
@@ -115,6 +124,12 @@ package sudoku.model
 		
 		private function checkConfirm():void
 		{
+			if (!_isConfirm) 
+			{
+				var count:int = leaveNumber.length;
+				_isConfirm = (count==1&&checkConfirmNumber(leaveNumber[0])) 
+			}
+			//
 			if (isConfirm) 
 			{
 				this.dispatchEvent(new SudokuEvent(THIS_CELL_CONFIRM));
@@ -123,11 +138,6 @@ package sudoku.model
 		
 		public function get isConfirm():Boolean
 		{
-			if (!_isConfirm) 
-			{
-				var count:int = leaveNumber.length;
-				_isConfirm = (count==1);
-			}
 			return _isConfirm;
 		}
 		

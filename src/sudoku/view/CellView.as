@@ -34,6 +34,7 @@ package sudoku.view
 			textfield.autoSize = TextFieldAutoSize.CENTER;
 			_data = data;
 			_data.addEventListener(CellData.THIS_CELL_UPDATE,onCellUpdate);
+			_data.addEventListener(CellData.THIS_CELL_CONFIRM,onCellConfirm);
 			textfield.htmlText ="<font size='15'>" +_data.numberString +"</font>";
 			addChild(textfield);
 			//
@@ -44,6 +45,15 @@ package sudoku.view
 			this.graphics.endFill();
 			//
 			this.addEventListener(MouseEvent.CLICK,onClickCell);
+		}
+		
+		protected function onCellConfirm(event:Event):void
+		{
+			this.graphics.clear();
+			this.graphics.beginFill(0x00ff00);
+			this.graphics.lineStyle(0.5,0);
+			this.graphics.drawRect(0,0,50,50);
+			this.graphics.endFill();
 		}
 		
 		protected function onClickCell(event:MouseEvent):void
