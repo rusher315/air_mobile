@@ -2,40 +2,40 @@ package sudoku.model
 {
 	import flash.events.Event;
 
-	public class GroupData
+	public class GroupData2
 	{
 		
 		
-		private var cellList:Vector.<CellData> = new Vector.<CellData>(SudokuData.LENGTH,true);
+		private var cellList:Vector.<CellData2> = new Vector.<CellData2>(SudokuData2.LENGTH,true);
 		
-		public function GroupData(list:Array)
+		public function GroupData2(list:Array)
 		{
 			init(list);
 		}
 		
 		private function init(list:Array):void
 		{
-			if (list.length!=SudokuData.LENGTH) trace("错误1");
+			if (list.length!=SudokuData2.LENGTH) trace("错误1");
 			for (var i:int = 0; i < cellList.length; i++)
 			{
 				if (cellList[i]) 
 				{
-					cellList[i].removeEventListener(CellData.THIS_CELL_CONFIRM,onCellConfirm);
+					cellList[i].removeEventListener(CellData2.THIS_CELL_CONFIRM,onCellConfirm);
 					cellList[i] = null;
 				}
 //				var cell:SudokuCell = list.shift() as SudokuCell;
-				var cell:CellData = list[i] as CellData;
+				var cell:CellData2 = list[i] as CellData2;
 				if (cell==null) trace("错误2");
 				cell.addGroup(this);
 				cellList[i] = cell;
-				cellList[i].addEventListener(CellData.THIS_CELL_CONFIRM,onCellConfirm);
+				cellList[i].addEventListener(CellData2.THIS_CELL_CONFIRM,onCellConfirm);
 			}
 			
 		}
 		
 		protected function onCellConfirm(event:Event):void
 		{
-			var cell:CellData = event.target as CellData;
+			var cell:CellData2 = event.target as CellData2;
 //			trace(cell.index);
 			if (cell.isConfirm)
 			{
@@ -48,9 +48,9 @@ package sudoku.model
 		
 		private function otherNotNumber(number:int):void
 		{
-			if (number>0&&number<=SudokuData.LENGTH)
+			if (number>0&&number<=SudokuData2.LENGTH)
 			{
-				for each (var cell:CellData in cellList)
+				for each (var cell:CellData2 in cellList)
 				{
 					if (!cell.isConfirm)
 					{
@@ -63,7 +63,7 @@ package sudoku.model
 		public function hasNumberCount(number:int):int
 		{
 			var count:int = 0;
-			var cell:CellData;
+			var cell:CellData2;
 			var temp:Array;
 			for each (cell in cellList)
 			{
@@ -79,7 +79,7 @@ package sudoku.model
 		
 		public function checkConfirm():void
 		{
-			var cell:CellData;
+			var cell:CellData2;
 			var temp:Array;
 			var list:Array = [];
 			var number:int;

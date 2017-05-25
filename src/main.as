@@ -24,8 +24,10 @@ package
 	import flash.ui.Keyboard;
 	import flash.utils.getDefinitionByName;
 	
-	import sudoku.SudokuMain;
-	import sudoku.view.SudokuView;
+	import sudoku.SudokuMain2;
+	import sudoku.view.SudokuView2;
+	
+	import sudoku2.SudokuData;
 	
 	
 //	[SWF(width="720",height="1280"backgroundColor="#333333")]
@@ -69,7 +71,8 @@ package
 			//
 //			root.scale
 			//
-			addChild(new SudokuMain(stage.stageWidth));
+			addChild(new SudokuMain2(stage.stageWidth));
+			new SudokuData();
 			return;
 			//
 			var urlloader:URLLoader = new URLLoader();

@@ -7,24 +7,24 @@ package sudoku.view
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	
-	import sudoku.SudokuEvent;
-	import sudoku.model.CellData;
+	import sudoku.SudokuEvent2;
+	import sudoku.model.CellData2;
 	
-	public class CellView extends Sprite
+	public class CellView2 extends Sprite
 	{
 		
-		private var _data:CellData;
+		private var _data:CellData2;
 		
 		private var textfield:TextField;
 		
-		public function CellView(cellwidth:Number,data:CellData)
+		public function CellView2(cellwidth:Number,data:CellData2)
 		{
 			super();
 			init(cellwidth,data);
 		}
 		
 	
-		private function init(cellwidth:Number,data:CellData):void
+		private function init(cellwidth:Number,data:CellData2):void
 		{
 			textfield = new TextField();
 			textfield.mouseEnabled  =false;
@@ -33,8 +33,8 @@ package sudoku.view
 			textfield.wordWrap = true;
 			textfield.autoSize = TextFieldAutoSize.CENTER;
 			_data = data;
-			_data.addEventListener(CellData.THIS_CELL_UPDATE,onCellUpdate);
-			_data.addEventListener(CellData.THIS_CELL_CONFIRM,onCellConfirm);
+			_data.addEventListener(CellData2.THIS_CELL_UPDATE,onCellUpdate);
+			_data.addEventListener(CellData2.THIS_CELL_CONFIRM,onCellConfirm);
 			textfield.htmlText ="<font size='15'>" +_data.numberString +"</font>";
 			addChild(textfield);
 			//
@@ -58,7 +58,7 @@ package sudoku.view
 		
 		protected function onClickCell(event:MouseEvent):void
 		{
-			dispatchEvent(new SudokuEvent(SudokuEvent.ON_CLICK_CELL,_data.cellIndex));
+			dispatchEvent(new SudokuEvent2(SudokuEvent2.ON_CLICK_CELL,_data.cellIndex));
 		}
 		
 		protected function onCellUpdate(event:Event):void
@@ -66,7 +66,7 @@ package sudoku.view
 			textfield.htmlText ="<font size='16'>" + _data.numberString +"</font>";
 		}		
 
-		public function get data():CellData
+		public function get data():CellData2
 		{
 			return _data;
 		}

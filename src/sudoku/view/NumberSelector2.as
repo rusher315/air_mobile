@@ -2,12 +2,12 @@ package sudoku.view
 {
 	import flash.display.Sprite;
 	
-	import sudoku.SudokuEvent;
-	import sudoku.model.SudokuData;
+	import sudoku.SudokuEvent2;
+	import sudoku.model.SudokuData2;
 	
-	public class NumberSelector extends Sprite
+	public class NumberSelector2 extends Sprite
 	{
-		public function NumberSelector()
+		public function NumberSelector2()
 		{
 			super();
 			init();
@@ -15,7 +15,7 @@ package sudoku.view
 		
 		private function init():void
 		{
-			for (var i:int = 0; i < SudokuData.LENGTH; i++) 
+			for (var i:int = 0; i < SudokuData2.LENGTH; i++) 
 			{
 				var button:NumberButton = new NumberButton(i+1);
 				button.x = i*50;
@@ -25,9 +25,9 @@ package sudoku.view
 			
 		}
 		
-		protected function onClickNumber(event:SudokuEvent):void
+		protected function onClickNumber(event:SudokuEvent2):void
 		{
-			this.dispatchEvent(new SudokuEvent(SudokuEvent.ON_CLICK_NUMBER,event.data));
+			this.dispatchEvent(new SudokuEvent2(SudokuEvent2.ON_CLICK_NUMBER,event.data));
 		}
 		
 	}
@@ -36,7 +36,7 @@ import flash.display.Sprite;
 import flash.events.MouseEvent;
 import flash.text.TextField;
 
-import sudoku.SudokuEvent;
+import sudoku.SudokuEvent2;
 
 class NumberButton extends Sprite
 {
@@ -67,6 +67,6 @@ class NumberButton extends Sprite
 	
 	protected function onClick(event:MouseEvent):void
 	{
-		this.dispatchEvent(new SudokuEvent("MouseEvent.CLICK",_number));
+		this.dispatchEvent(new SudokuEvent2("MouseEvent.CLICK",_number));
 	}	
 }

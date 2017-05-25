@@ -2,26 +2,26 @@ package sudoku.model
 {
 	import flash.events.EventDispatcher;
 	
-	import sudoku.SudokuEvent;
+	import sudoku.SudokuEvent2;
 
-	public class CellData extends EventDispatcher
+	public class CellData2 extends EventDispatcher
 	{
 		
 		public static const THIS_CELL_CONFIRM:String = "THIS_CELL_CONFIRM";
 		public static const THIS_CELL_UPDATE:String = "THIS_CELL_UPDATE";
 		
-		private var numberList:Vector.<int> = new Vector.<int>(SudokuData.LENGTH,true);
+		private var numberList:Vector.<int> = new Vector.<int>(SudokuData2.LENGTH,true);
 		
 		private var _cellIndex:int;
 		private var _lineIndex:int;
 		private var _rowIndex:int;
 		private var _setIndex:int;
 		
-		private var groupList:Vector.<GroupData> = new Vector.<GroupData>();
+		private var groupList:Vector.<GroupData2> = new Vector.<GroupData2>();
 		
 		private var _isConfirm:Boolean = false;
 		
-		public function CellData(cellIndex:int)
+		public function CellData2(cellIndex:int)
 		{
 			init(cellIndex);
 		}
@@ -30,8 +30,8 @@ package sudoku.model
 		{
 			_cellIndex = cellIndex;
 			//
-			_lineIndex = cellIndex%SudokuData.LENGTH;
-			_rowIndex = int(cellIndex/SudokuData.LENGTH);
+			_lineIndex = cellIndex%SudokuData2.LENGTH;
+			_rowIndex = int(cellIndex/SudokuData2.LENGTH);
 			_setIndex = int(lineIndex/3)+int(rowIndex/3)*3;
 			//
 //			for each (var number:int in numberList) //wrong
@@ -66,7 +66,7 @@ package sudoku.model
 			return _setIndex;
 		}
 		
-		public function addGroup(group:GroupData):void
+		public function addGroup(group:GroupData2):void
 		{
 			if (groupList.indexOf(group)!=-1||groupList.length>=3) 
 			{
@@ -77,10 +77,10 @@ package sudoku.model
 		
 		private function checkConfirmNumber(number:int):Boolean
 		{
-			if (number<=0||number>SudokuData.LENGTH) return false;
+			if (number<=0||number>SudokuData2.LENGTH) return false;
 			if (leaveNumber.indexOf(number)==-1) return false;
 //			if (groupList.length!=3) 
-			for each (var group:GroupData in groupList) 
+			for each (var group:GroupData2 in groupList) 
 			{
 				if (group.hasNumberCount(number)!=1/*&&group.hasNumberCount(number)!=SudokuData.LENGTH*/)  return false;
 			}
@@ -99,7 +99,7 @@ package sudoku.model
 		
 		public function setConfirmNumber(number:int):void
 		{
-			if (number<=0||number>SudokuData.LENGTH) throw new Error();
+			if (number<=0||number>SudokuData2.LENGTH) throw new Error();
 			if (leaveNumber.indexOf(number)==-1) throw new Error();
 			//
 			for (var i:int = 0; i < numberList.length; i++) 
@@ -107,7 +107,7 @@ package sudoku.model
 				numberList[i] = 0;
 			}
 			numberList[number-1] = 1;
-			this.dispatchEvent(new SudokuEvent(THIS_CELL_UPDATE));
+			this.dispatchEvent(new SudokuEvent2(THIS_CELL_UPDATE));
 			_isConfirm = true;
 			checkConfirm();
 		}
@@ -119,10 +119,10 @@ package sudoku.model
 		
 		public function notNumber(number:int):void
 		{
-			if (number>0&&number<=SudokuData.LENGTH)
+			if (number>0&&number<=SudokuData2.LENGTH)
 			{
 				numberList[number-1] = 0;
-				this.dispatchEvent(new SudokuEvent(THIS_CELL_UPDATE));
+				this.dispatchEvent(new SudokuEvent2(THIS_CELL_UPDATE));
 				checkConfirm();
 			}
 		}
@@ -137,7 +137,7 @@ package sudoku.model
 			//
 			if (isConfirm) 
 			{
-				this.dispatchEvent(new SudokuEvent(THIS_CELL_CONFIRM));
+				this.dispatchEvent(new SudokuEvent2(THIS_CELL_CONFIRM));
 			}
 		}
 		
