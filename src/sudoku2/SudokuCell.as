@@ -1,6 +1,7 @@
 package sudoku2
 {
 	import flash.events.EventDispatcher;
+	
 	import sudoku2.group.SudokuGroup;
 
 	public class SudokuCell extends EventDispatcher
@@ -83,6 +84,18 @@ package sudoku2
 			numberList[number-1] = 1;
 		}
 		
+		public function setNumberList(list:Array):void
+		{
+			for (var i:int = 0; i < numberList.length; i++) 
+			{
+				numberList[i] = 0;
+			}
+			for each (var number:int in list) 
+			{
+				numberList[number-1] = 1;
+			}
+		}
+		
 		public function notNumber(number:int):void
 		{
 			if (!isConfirm&&number>0&&number<=SudokuData.LENGTH)
@@ -101,6 +114,30 @@ package sudoku2
 //		{
 //			
 //		}
+		
+		public function getSameNumber(cell:SudokuCell):Array
+		{
+			var list:Array = [];
+			var temp1:Array = this.leaveNumber;
+			var temp2:Array = cell.leaveNumber;
+			for (var i:int = 0; i < temp1.length; i++) 
+			{
+				if (temp2.indexOf(temp1[i])!=-1) 
+				{
+					list.push(temp1[i]);
+				}
+			}
+			return list;
+		}
+		
+		public function hasNumberInList(list:Array):Boolean
+		{
+			for each (var i:int in list) 
+			{
+				if (hasNumber(i)) return true; 
+			}
+			return false;
+		}
 		
 		public function hasNumber(number:int):Boolean
 		{

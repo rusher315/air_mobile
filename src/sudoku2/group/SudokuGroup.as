@@ -115,11 +115,50 @@ package sudoku2.group
 				}
 			}
 			//
+			deleteExtraNumber2();
 		}
 		
 		private function deleteExtraNumber2():void 
 		{
-			
+			var cell:SudokuCell;
+			var cell2:SudokuCell;
+			var cell3:SudokuCell;
+			//显性数对
+			for each (cell in cellList) 
+			{
+				out:for each (cell2 in cellList) 
+				{
+					var tempsamelist:Array = cell.getSameNumber(cell2);
+					if (tempsamelist.length==2) 
+					{
+						for each (cell3 in cellList)
+						{
+							if (cell3.hasNumberInList(tempsamelist)) 
+							{
+								break out;
+							}
+						}
+						//
+						cell.setNumberList(tempsamelist);
+						cell2.setNumberList(tempsamelist);
+					}
+				}
+			}
+			//
+			//
+			//显性数组
+		}
+		
+		private function checkArrayHasSameNumber(list1:Array,list2:Array):Boolean
+		{
+			for each (var i:int in list1) 
+			{
+				if (list2.indexOf(i)!=-1) 
+				{
+					return true;
+				}
+			}
+			return false;
 		}
 		
 		public function get isConfirm():Boolean
