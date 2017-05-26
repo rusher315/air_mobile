@@ -122,22 +122,30 @@ package sudoku2.group
 		{
 			var cell:SudokuCell;
 			var cell2:SudokuCell;
-			var cell3:SudokuCell;
 			//显性数对
 			for each (cell in cellList) 
 			{
-				out:for each (cell2 in cellList) 
+				for each (cell2 in cellList) 
 				{
 					var tempsamelist:Array = cell.getSameNumber(cell2);
+					var templist:Array = [];
+					for each (var number:int in tempsamelist) 
+					{
+						if (this.hasNumberCount(number)!=2)
+						{
+							templist.push(number);
+						}
+					}
+					//
+					for each (var number2:int in templist) 
+					{
+						var index:int = tempsamelist.indexOf(number2);
+						tempsamelist.splice(index,1);
+					}
+					//
 					if (tempsamelist.length==2) 
 					{
-						for each (cell3 in cellList)
-						{
-							if (cell3.hasNumberInList(tempsamelist)) 
-							{
-								break out;
-							}
-						}
+						trace(tempsamelist);
 						//
 						cell.setNumberList(tempsamelist);
 						cell2.setNumberList(tempsamelist);
@@ -147,6 +155,11 @@ package sudoku2.group
 			//
 			//
 			//显性数组
+		}
+		
+		private function deleteExtraNumber3():void 
+		{
+			
 		}
 		
 		private function checkArrayHasSameNumber(list1:Array,list2:Array):Boolean

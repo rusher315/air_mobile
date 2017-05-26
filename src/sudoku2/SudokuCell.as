@@ -127,6 +127,8 @@ package sudoku2
 					list.push(temp1[i]);
 				}
 			}
+//			trace("SudokuCell.getSameNumber(cell)"+list);
+			
 			return list;
 		}
 		
